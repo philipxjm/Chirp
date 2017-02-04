@@ -1,0 +1,24 @@
+{
+  "name": "chirp-client",
+  "version": "1.0.0",
+  "description": "https://github.com/philipxjm/chirp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean-css": "^2.2.0",
+    "gulp-flatten": "^0.3.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-preprocess": "^2.0.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-serve": "^1.4.0",
+    "gulp-sourcemaps": "^1.9.1",
+    "gulp-uglify": "^2.0.0",
+    "pump": "^1.0.1"
+  }
+}
