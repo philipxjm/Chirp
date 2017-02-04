@@ -32,9 +32,9 @@ def analyze(tweets):
 		result = json.loads(urlopen(request).read().decode())
 		analyzedTweet = AnalyzedTweet(tweet[0],
 			tweet[2],
-			result["label"], 
-			result["probability"]["pos"], 
-			result["probability"]["neg"], 
+			result["label"],
+			result["probability"]["pos"],
+			result["probability"]["neg"],
 			result["probability"]["neutral"])
 		print(analyzedTweet.toString())
 		analyzedTweets.append(analyzedTweet)
@@ -49,11 +49,10 @@ def search(keywords, count=100):
 	for tweet in r:
 		# print(tweet)
 		# tweets.append(tweet)
-		tweets.append([tweet["id_str"], 
-			tweet["text"], 
+		tweets.append([tweet["id_str"],
+			tweet["text"],
 			tweet["user"]["location"]])
 
-	pickle.dump(tweets, open("tweets.p", "wb" ) )
 	return tweets
 
 def runSearchAnalysis(keywords, count=100):
