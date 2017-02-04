@@ -2,6 +2,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from TwitterSearch import *
 import json
+import pickle
 
 class AnalyzedTweet(object):
 	"""docstring for AnalyzedTweet"""
@@ -15,7 +16,6 @@ class AnalyzedTweet(object):
 
 	def toString(self):
 		return "{twitID: " + str(self.twitID) + ", location: " + str(self.location) + ", label: " + str(self.label) + ", prob_pos: " + str(self.prob_pos) + ", prob_neg: " + str(self.prob_neg) + ", prob_neu: " + str(self.prob_neu) + "}"
-
 
 def analyze(tweets):
 	analyzedTweets = []
@@ -45,17 +45,18 @@ def search(keywords, count=100):
 
 		ts = TwitterSearch(
 			consumer_key = 
-			'A9XcMbJQNoc5UuDDQqYhDIkDi',
+			'sNjj2O9xgtclg2l4Y3batJNmD',
 			consumer_secret = 
-			'cfDMXwwCs3Pf3jyu551dQCIKxpaVQwuDWPsqYtNZ3J4dTfatiI',
+			'iKMk9pye8bBZLPzGBupCco2cEVKG8buESq4m2UUuaI5Br7c1RH',
 			access_token = 
-			'2155608048-Tmj6JM6b5KEprwvPsShtpBaL6JiwheWt07qlt7F',
+			'2382398376-zmcPodEblLN3v3aiJ1uHoEAAJp2XJQ5lDO7xc5a',
 			access_token_secret = 
-			'3MnKXHa21eZFmrj8tNKfdhIISJLDN5wprZHTZEAkvsNL6'
+			'17X7Dk2LrWY4BEUhsBsjtciSCGJXdslNSRqk4hmWfebhg'
 		)
 
 		for tweet in ts.search_tweets_iterable(tso):
-			print(tweet)
+			# print(tweet)
+			# tweets.append(tweet)
 			tweets.append([tweet["id_str"], 
 				tweet["text"], 
 				tweet["user"]["location"]])
@@ -63,9 +64,10 @@ def search(keywords, count=100):
 	except TwitterSearchException as e:
 		print(e)
 
+	pickle.dump(tweets, open("tweets.p", "wb" ) )
 	return tweets
 
 def runSearchAnalysis(keywords, count=100):
 	return analyze(search(keywords, count))
 
-runSearchAnalysis(["trump"], 10)
+# runSearchAnalysis(["trump"], 10)
