@@ -1,7 +1,16 @@
 {
-	"Access Token": "2382398376-zmcPodEblLN3v3aiJ1uHoEAAJp2XJQ5lDO7xc5a",
-	"Access Token Secret": "17X7Dk2LrWY4BEUhsBsjtciSCGJXdslNSRqk4hmWfebhg",
-	"Access Level": "Read and write",
-	"Owner": "patrick_kage",
-	"Owner ID": "2382398376"
+	"access_token": {
+		"Access Token": "2382398376-zmcPodEblLN3v3aiJ1uHoEAAJp2XJQ5lDO7xc5a",
+		"Access Token Secret": "17X7Dk2LrWY4BEUhsBsjtciSCGJXdslNSRqk4hmWfebhg",
+		"Access Level": "Read and write",
+		"Owner": "patrick_kage",
+		"Owner ID": "2382398376"
+	},
+	"application_settings": {
+		"Consumer Key (API Key)": "sNjj2O9xgtclg2l4Y3batJNmD",
+		"Consumer Secret (API Secret)": "iKMk9pye8bBZLPzGBupCco2cEVKG8buESq4m2UUuaI5Br7c1RH",
+		"Access Level": "Read and write",
+		"Owner": "patrick_kage",
+		"Owner ID": "2382398376"
+	}
 }
