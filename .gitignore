@@ -1,5 +1,5 @@
 .DS_Store
-sqlite3.db
+db.sqlite3
 # Byte-compiled / optimized / DLL files
 
 down vote
