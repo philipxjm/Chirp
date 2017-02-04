@@ -1,0 +1,40 @@
+@function gray($level) {
+	@return rgb($level * 16, $level * 16, $level * 16);	
+}
+
+@for $i from 0 through 16 {
+	.gray-#{$i} {
+		background-color: gray($i);
+	}
+
+	.gray-#{$i}-text {
+		color: gray($i);
+	}
+}
+
+// special named colors
+.white {
+	@extend .gray-16;
+}
+
+.white-text { 
+	@extend .gray-16-text;
+}
+
+.black {
+	@extend .gray-0;
+}
+
+.black-text { 
+	@extend .gray-0-text;
+}
+
+.highlight {
+	background-color: yellow;
+}
+
+// helper!
+.inverse {
+	@extend .black;
+	@extend .white-text;
+}

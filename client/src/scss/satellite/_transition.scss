@@ -1,0 +1,6 @@
+@function transition($prop) {
+	@return ($prop 0.25s cubic-bezier(0,0,0.3,1));
+}
+@mixin transition($prop) {
+	transition: transition($prop);
+}

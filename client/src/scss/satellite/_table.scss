@@ -1,0 +1,26 @@
+@import "transition";
+table {
+	border-collapse: collapse; 
+}
+
+th {
+	padding: 0 1em 0 1em;
+	@extend .monospace;
+}
+
+td {
+	padding: 0 1em 0 1em;
+}
+
+thead > tr {
+	background-color: #aaa;
+	color: white;
+}
+
+tbody > tr {
+	@include transition(background-color);
+
+	&:hover {
+		background-color: #eee;
+	}
+}
