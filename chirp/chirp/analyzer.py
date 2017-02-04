@@ -59,4 +59,4 @@ def search(keywords, count=100):
 def runSearchAnalysis(keywords, count=100):
 	return analyze(search(keywords, count))
 
-print(runSearchAnalysis(["trump"], 10))
+# print(runSearchAnalysis(["trump"], 10))
