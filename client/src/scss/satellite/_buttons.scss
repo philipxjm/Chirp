@@ -1,0 +1,54 @@
+@import "transition";
+
+.button, .button-secondary {
+	display: block;
+	box-sizing: border-box;
+	border: 1px solid #aaa;
+	padding: 0 1em 0 1em;
+	margin: 0.5em 0.5em 0 0.5em;
+	height: 20px;
+	font-size: 12px;
+	border-radius: 10px;
+
+	outline: 0;
+	font-family: "Roboto Mono", monospace;
+	cursor: pointer;
+	color: black;
+	background-color: white;
+
+	transition: transition(color), transition(background-color), transition(border);
+
+	&:hover {
+		border-color: black;
+		color: black;
+	}
+	
+	&:active {
+		color: white;
+		background-color: black;
+	}
+
+	&:visited { // shim for anchor tags
+		color: white;
+	}
+}
+
+.button-primary {
+	@extend .button-secondary;
+	color: #eee;
+	background-color: black;
+	border-color: black;
+
+	&:hover {
+		color: white;
+	}
+
+	&:active {
+		color: black;
+		background-color: white;
+	}
+
+	&:visited { // shim for anchor tags
+		color: #eee;
+	}
+}
