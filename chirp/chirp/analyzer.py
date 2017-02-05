@@ -20,7 +20,7 @@ class AnalyzedTweet(object):
 def geocode(locStr):
 	api = "AIzaSyBZ68_Iz3U1Wpdo18viv0lV4X0PGO79jhg"
 	url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + locStr + "&key= " + api
-	print(url)
+	# print(url)
 	r = requests.get(url)
 	if r.json()["status"] == "OK":
 		return [r.json()["results"][0]["geometry"]["location"]["lat"], r.json()["results"][0]["geometry"]["location"]["lng"]]
@@ -44,24 +44,32 @@ def analyze(tweets):
 		analyzedTweets.append(analyzedTweet)
 	return analyzedTweets
 
-def search(keyword, count=100):
+def search(keyword, count):
 	tweets = []
 
 	api = TwitterAPI("sNjj2O9xgtclg2l4Y3batJNmD", "iKMk9pye8bBZLPzGBupCco2cEVKG8buESq4m2UUuaI5Br7c1RH", "2382398376-zmcPodEblLN3v3aiJ1uHoEAAJp2XJQ5lDO7xc5a", "17X7Dk2LrWY4BEUhsBsjtciSCGJXdslNSRqk4hmWfebhg")
-	r = api.request('search/tweets', {'q':keyword})
+	r = api.request('search/tweets', {'q':keyword, 'count': count})
 
+	total = 0
+	tossed = 0
 	for tweet in r:
 		# print(tweet)
+
 		geo = geocode(tweet["user"]["location"])
 		if geo != "BAD. DISCARD.":
+			total += 1
 			tweets.append([tweet["id_str"], 
 				tweet["text"], 
 				geo])
+		else:
+			total += 1
+			tossed += 1
+			print("total: " + str(total) + " tossed: " + str(tossed))
 
 	return tweets
 
-def runSearchAnalysis(keyword, count=100):
+def runSearchAnalysis(keyword, count):
 	return analyze(search(keyword, count))
 
-# runSearchAnalysis(["trump"], 10)
+runSearchAnalysis(["trump"], 1000)
 # print(geocode("somewhere"))
