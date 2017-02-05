@@ -2,14 +2,14 @@ var app = require('express')();
 var request = require('request-promise');
 
 var REQ_URL = 'http://127.0.0.1:8080';
-REQ_URL = (process.argv[1]) ? process.argv[1] : 
+REQ_URL = (process.argv[2]) ? process.argv[2] : REQ_URL)
 
 app.get('*', function(req, res) {
 	request({
 		method: 'GET',
 		uri: REQ_URL + req.url
 	}).then(rp => {
-		res.json(rp);
+		res.json(JSON.parse(rp));
 	}).catch(err => {
 		console.log(err);
 		res.json({});
