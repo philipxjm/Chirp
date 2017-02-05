@@ -1,0 +1,101 @@
+@import "colors";
+
+.banner {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	flex-direction: column;
+
+	// so we know how to be square
+	$unit: 24px;
+	font-size: $unit;
+
+	@include transition(transform);
+	&.active {
+		transform: translateX(0);
+	}
+	transform: translateX($unit * -16);
+
+	// banner rows
+	> .banner-row {
+		height: $unit * 2;
+
+		&.banner-align-row {
+			display: flex;
+			flex-direction: row;
+		}
+
+		> .banner-field {
+			width: $unit * 16;
+			background-color: white;
+
+			@extend .center-column;
+
+			> .banner-input[type="text"] {
+				display: block;
+				font-size: $unit;
+				width: 90%;
+
+			}
+		}
+
+		> .banner-radio {
+			@extend .clickable, .monospace;
+
+			width: $unit * 16;
+			height: $unit * 2;
+			background-color: white;
+			
+			font-weight: bold;
+
+			@extend .center-row;
+			justify-content: flex-start;
+
+			&:hover {
+				@extend .gray-15;
+			}
+
+			> .banner-radio-label {
+				padding-left: 2em;
+				font-size: 1.3em;
+			}
+		}
+
+		input[type="radio"] {display: none;}
+		input[type="radio"]:checked + label {
+			@extend .gray-14;
+		}
+
+		> .banner-handle {
+			background-color: $menu-bg;
+			height: $unit * 2;
+			width: $unit * 2;
+			cursor: pointer;
+
+			@extend .center-column;
+
+			> .material-icons {
+				font-size: 1.25em;
+			}
+
+		}
+	}
+
+	// banner header
+	> .banner-header {
+		width: calc(#{$unit * 16} - 1em);
+
+		background-color: $menu-header-bg;
+
+		@extend .monospace;
+		text-transform: uppercase;
+		font-weight: 700;
+		padding-left: 1em;
+		height: $unit;
+
+		@extend .center-row;
+		justify-content: flex-start;
+	}
+}

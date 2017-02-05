@@ -20,7 +20,7 @@ from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^analyzed-tweets/^[A-Za-z.\s]+)$', views.analyzed_tweet_list),
+    url(r'^analyzed-tweets/by-name/(?P<search_arg>[\w-]+)$', views.analyzed_tweet_list),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
