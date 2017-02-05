@@ -9,32 +9,38 @@
 		<div class="fullscreen map" id="map">
 			
 		</div>
-		<div class="fullscreen">
+		<div class="fullscreen non-interactive">
 			<div class="banner" v-bind:class="{ active: !bannerOpen }">
 				<div class="banner-row banner-align-row">
 					<div class="banner-field">
-						<input type="text" placeholder="topic" class="banner-input" v-on:keyup="topic_keyup" v-model="topic" autocorrect="off" autocomplete="off">
+						<input type="text" placeholder="topic" class="banner-input" v-on:keyup.13="topic_enter" v-model="topic" autocorrect="off" autocomplete="off">
 					</div>
 					<div class="banner-handle" v-on:click="toggleBanner">
 						<i class="material-icons white-text" v-if="bannerOpen">menu</i>
 						<i class="material-icons white-text" v-else>arrow_back</i>
 					</div>
 				</div>
-				<div class="banner-header">fuck {{vis}}</div>
+				<div class="banner-header">displaying as {{vis}}</div>
 				<div class="banner-row banner-column-layout">
-					<input type="radio" value="foo" id="radio-map" v-model="vis">
-					<label class="banner-radio" for="radio-map">
-						<span class="banner-radio-label">foo</span>
-					</label>
-					<input type="radio" value="bar" id="radio-map2" v-model="vis">
-					<label class="banner-radio" for="radio-map2">
-						<span class="banner-radio-label">bar</span>
-					</label>
-					<input type="radio" value="baz" id="radio-map3" v-model="vis">
-					<label class="banner-radio" for="radio-map3">
-						<span class="banner-radio-label">baz</span>
-					</label>
+					<template v-for="name in moduleIndex">
+						<input type="radio" :value="name" name="module" :id="'radio-' + name" v-model="vis" v-on:change="change_vis">
+						<label class="banner-radio" :for="'radio-' + name">
+							<span class="banner-radio-label">{{name}}</span>
+						</label>
+					</template>
 				</div>
+				<div class="banner-header">selected {{mood}} tweets</div>
+				<div class="banner-row banner-column-layout">
+					<template v-for="name in allMoods">
+						<input type="radio" :value="name" name="moodradio" :id="'mood-' + name" v-model="mood" v-on:change="change_mood">
+						<label class="banner-radio" :for="'mood-' + name">
+							<span class="banner-radio-label">{{name}}</span>
+						</label>
+					</template>
+				</div>
+			</div>
+			<div id="panel" class="">
+				
 			</div>
 		</div>
 	</div>

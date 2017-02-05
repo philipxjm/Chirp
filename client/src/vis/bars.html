@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chirp D3 - Bars</title>
+    <style>
+    text {
+      fill: black;
+      font: 10px sans-serif;
+      text-anchor: end;
+    }
+    .positive {
+      fill: green;
+    }
+    .negative {
+      fill: red;
+    }
+    .neutral {
+      fill: yellow;
+    }
+
+    #number_pos, #number_neg, #number_neu {
+      font-size: 48px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+
+    #number_pos {
+      color: green;
+    }
+    #number_neg {
+      color: red;
+    }
+    #number_neu {
+      color: black
+    }
+
+    body {
+	background-color: white;
+	margin: 0;
+	padding: 0;
+	border: 0;
+    }
+   </style>
+ </head>
+ <body>
+    <section style="text-align:center;">
+      <div style="width: 33%; float:left;">
+        <p>Positive</p>
+        <p id="number_pos"></p>
+      </div>
+      <div style="width: 33%; float:left;">
+        <p>Neutral</p>
+        <p id="number_neu"></p>
+      </div>
+      <div style="width: 33%; float:left;">
+        <p>Negative</p>
+        <p id="number_neg"></p>
+      </div>
+    </section>
+    <svg class="chart"></svg>
+    <div id="tweet_box"></div>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+      // Get Tweets
+      var tweets = parent.window.tweets;
+      console.log(tweets);
+      var width = 450;
+      var barHeight = 30;
+      var exp = 450;
+
+      var pos = []
+      for(i = 0; i < tweets.length; i++) {
+        pos.push(tweets[i].prob_pos)
+      }
+
+      var svg = d3.select(".chart")
+        .attr("height", barHeight * tweets.length)
+        .attr("width", width);
+
+      var bar = svg.selectAll("g")
+        .data(tweets)
+        .enter().append("g")
+          .attr("class", "group")
+          .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+
+      bar.append("rect")
+        .attr("class", "positive")
+        .attr("height", barHeight - 1)
+        .attr("width", function(d){
+          var total = d.prob_neg + d.prob_pos + d.prob_neu;
+          var length = d.prob_pos / total;
+          return length*exp;
+        });
+
+        bar.append("rect")
+          .attr("class", "neutral")
+          .attr("transform", function(d){
+            var total = d.prob_neg + d.prob_pos + d.prob_neu;
+            var offset = d.prob_pos / total;
+            return "translate(" + offset*exp + "0)"
+          })
+          .attr("height", barHeight - 1)
+          .attr("width", function(d){
+            var total = d.prob_neg + d.prob_pos + d.prob_neu;
+            var length = d.prob_neu / total;
+            return length*exp;
+          });
+
+      bar.append("rect")
+        .attr("class", "negative")
+        .attr("transform", function(d){
+          var total = d.prob_neg + d.prob_pos + d.prob_neu;
+          var offset = (d.prob_pos + d.prob_neu) / total;
+          return "translate(" + offset*exp + "0)"
+        })
+        .attr("height", barHeight - 1)
+        .attr("width", function(d){
+          var total = d.prob_neg + d.prob_pos + d.prob_neu;
+          var length = d.prob_neg / total;
+          return length*exp;
+        });
+
+      bar.append("text")
+        .text(function(d){ return d.label })
+        .attr("x", exp - 3)
+        .attr("y", barHeight/2)
+        .attr("dy", ".35em");
+
+      // Define scale
+      var x = d3.scale.linear()
+        .domain([0, d3.max(pos)])
+        .range([0, width]);
+
+      var pos = 0,
+        neg = 0,
+        neu = 0;
+
+      for(i = 0; i < tweets.length; i++) {
+        if (tweets[i].label == "pos") pos++
+        if (tweets[i].label == "neg") neg++
+        if (tweets[i].label == "neutral") neu++
+      }
+      $("#number_pos").text(pos)
+      $("#number_neg").text(neg)
+      $("#number_neu").text(neu)
+
+
+      setTimeout(_ => $(parent.document.getElementById('barsembed')).attr('height', window.innerHeight), 150);
+    </script>
+ </body>
+</html>

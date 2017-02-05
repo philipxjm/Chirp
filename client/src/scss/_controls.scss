@@ -5,6 +5,8 @@
 	top: 0;
 	left: 0;
 
+	pointer-events: initial;
+
 	display: flex;
 	flex-direction: column;
 
@@ -20,7 +22,7 @@
 
 	// banner rows
 	> .banner-row {
-		height: $unit * 2;
+		min-height: $unit * 2;
 
 		&.banner-align-row {
 			display: flex;

@@ -25,6 +25,16 @@ gulp.task('copylibs', function() {
 		.pipe(gulp.dest('../chirp/assets/js/lib/'));
 });
 
+gulp.task('copyvis', function() {
+	return gulp.src('src/vis/**')
+		.pipe(gulp.dest('../chirp/assets/js/vis/'));
+});
+
+gulp.task('copydata', function() {
+	return gulp.src('src/data/**')
+		.pipe(gulp.dest('../chirp/assets/data/'));
+});
+
 gulp.task('compilejs', function(cb) {
 	pump([
 		gulp.src('src/js/*'),
@@ -56,6 +66,8 @@ gulp.task('watch', function() {
 	gulp.watch('src/html/*', ['compilehtml']);
 	gulp.watch('src/scss/**', ['compilescss']);
 	gulp.watch('src/libs/*', ['copylibs']);
+	gulp.watch('src/vis/*', ['copyvis']);
+	gulp.watch('src/data/*', ['copydata']);
 })
 
 gulp.task('serve', serve('../chirp/assets/'));
@@ -65,12 +77,16 @@ gulp.task('build', [
 	'compilescss',
 	'copylibs',
 	'compilehtml',
+	'copyvis',
+	'copydata'
 ])
 
 gulp.task('default', [
 	'compilejs',
 	'compilescss',
 	'copylibs',
+	'copyvis',
+	'copydata',
 	'compilehtml',
 	'watch',
 	'serve'

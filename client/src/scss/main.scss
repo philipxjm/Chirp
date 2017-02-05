@@ -3,3 +3,7 @@
 @import "map";
 @import "controls";
 
+
+.non-interactive {
+	pointer-events: none;
+}
