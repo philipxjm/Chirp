@@ -1,0 +1,16 @@
+{
+  "name": "tunnel",
+  "version": "1.0.0",
+  "description": "weep for me",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "patrick kage",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1"
+  }
+}
