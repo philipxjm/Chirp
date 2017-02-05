@@ -1,8 +1,12 @@
+from __future__ import print_function
+from TwitterAPI import TwitterAPI
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 import json
 import requests
-from TwitterAPI import TwitterAPI
+import semantria
+import uuid
+import time
 
 class AnalyzedTweet(object):
 	"""docstring for AnalyzedTweet"""
@@ -51,6 +55,45 @@ def analyze(tweets):
 		analyzedTweets.append(analyzedTweet)
 	return analyzedTweets
 
+def analyze2(tweets):
+	consumerKey = "7bba1e0b-3a0a-4c27-823d-0a06ab8d27f4"
+	consumerSecret = "335156f6-a161-490c-a9c2-203ec44c0cbd"
+	def onRequest(sender,	result):
+		print(result)
+	def onResponse(sender,	result):
+		print(result)
+	def onError(sender,	result):
+		print(result)
+	def onDocsAutoResponse(sender,	result):
+		print(result)
+	def onCollsAutoResponse(sender,	result):
+		print(result)
+	serializer = semantria.JsonSerializer()
+	session	=	semantria.Session(consumerKey,	consumerSecret,	serializer)
+	# print(session.getConfigurations())
+	session.Error += onError
+	analyzedTweets	= []
+
+	for tweet in tweets:
+		doc	= { "id":str(uuid.uuid1()).replace("-", ""), "text":tweet[1] }
+		status	=	session.queueDocument(doc)
+		time.sleep(0.2)
+		status = session.getProcessedDocuments()
+		if isinstance(status, list):
+			for object in status:
+				# print(object)
+				analyzedTweet = AnalyzedTweet(tweet[0],
+					tweet[2],
+					tweet[3],
+					object["sentiment_polarity"],
+					1,
+					1,
+					1)
+				analyzedTweets.append(analyzedTweet)
+				print(analyzedTweet)
+	return analyzedTweets
+
+
 def search(keyword, count):
 	tweets = []
 	api = TwitterAPI("sNjj2O9xgtclg2l4Y3batJNmD", "iKMk9pye8bBZLPzGBupCco2cEVKG8buESq4m2UUuaI5Br7c1RH", "2382398376-zmcPodEblLN3v3aiJ1uHoEAAJp2XJQ5lDO7xc5a", "17X7Dk2LrWY4BEUhsBsjtciSCGJXdslNSRqk4hmWfebhg")
@@ -86,6 +129,8 @@ def search(keyword, count):
 
 def runSearchAnalysis(keyword, count):
 	return analyze(search(keyword, count))
+	# return analyze2(search(keyword, count))
 
-#runSearchAnalysis(["trump"], 1000)
+# runSearchAnalysis(["trump"], 10)
 # print(geocode("new york city"))
+# analyze2(["Wow im really loving this place"])
