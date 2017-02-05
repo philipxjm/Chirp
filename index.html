@@ -38,7 +38,7 @@
        var Location = $.get("http://13.68.219.74/tweets");
        var points = [];
        for (i = 0; i < Location.length; i++) {
-         var location = new googe.maps.LatLng(Location[i][0], Location[i][1]);
+         var location = new google.maps.LatLng(Location[i][0], Location[i][1]);
          points.push(location);
        }
       return points
