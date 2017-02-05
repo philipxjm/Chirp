@@ -71,5 +71,5 @@ def search(keyword, count):
 def runSearchAnalysis(keyword, count):
 	return analyze(search(keyword, count))
 
-runSearchAnalysis(["trump"], 1000)
+# runSearchAnalysis(["trump"], 1000)
 # print(geocode("somewhere"))
