@@ -131,6 +131,6 @@ def runSearchAnalysis(keyword, count):
 	return analyze(search(keyword, count))
 	# return analyze2(search(keyword, count))
 
-# runSearchAnalysis(["trump"], 10)
+runSearchAnalysis(["trump"], 100)
 # print(geocode("new york city"))
 # analyze2(["Wow im really loving this place"])
