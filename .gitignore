@@ -149,3 +149,5 @@ ENV/
 .idea/
 node_modules/
 
+settings.py
+
