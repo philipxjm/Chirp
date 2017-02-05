@@ -13,7 +13,7 @@ class AnalyzedTweetModel(models.Model):
     )
 
     search_string = models.CharField(max_length=200, default="")
-    twitID = models.IntegerField(default=0)
+    twitID = models.CharField(max_length=100, default="")
     label = models.CharField(choices=SENTIMENT_CHOICES, max_length=15, default='neutral')
     longitude = models.FloatField(default=0)
     latitude = models.FloatField(default=0)

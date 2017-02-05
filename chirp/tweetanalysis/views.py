@@ -15,7 +15,7 @@ def analyzed_tweet_list(request, query):
         serializer = serializers.AnalyzedTweetModelSerializer(tweets, many=True)
         return Response(serializer.data)
     else:
-        tweets = analyzer.runSearchAnalysis([query], count=400)
+        tweets = analyzer.runSearchAnalysis([query], count=2)
 
         for tweet in tweets:
             analyzed_tweet = models.AnalyzedTweetModel()
