@@ -6,9 +6,10 @@ from TwitterAPI import TwitterAPI
 
 class AnalyzedTweet(object):
 	"""docstring for AnalyzedTweet"""
-	def __init__(self, twitID, location, label, prob_pos, prob_neg, prob_neu):
+	def __init__(self, twitID, location, time, label, prob_pos, prob_neg, prob_neu):
 		self.twitID = twitID
 		self.location = location
+		self.time = time
 		self.label = label
 		self.prob_pos = prob_pos
 		self.prob_neg = prob_neg
@@ -36,6 +37,7 @@ def analyze(tweets):
 		result = json.loads(urlopen(request).read().decode())
 		analyzedTweet = AnalyzedTweet(tweet[0],
 			tweet[2],
+			tweet[3],
 			result["label"],
 			result["probability"]["pos"],
 			result["probability"]["neg"],
@@ -46,30 +48,39 @@ def analyze(tweets):
 
 def search(keyword, count):
 	tweets = []
-
 	api = TwitterAPI("sNjj2O9xgtclg2l4Y3batJNmD", "iKMk9pye8bBZLPzGBupCco2cEVKG8buESq4m2UUuaI5Br7c1RH", "2382398376-zmcPodEblLN3v3aiJ1uHoEAAJp2XJQ5lDO7xc5a", "17X7Dk2LrWY4BEUhsBsjtciSCGJXdslNSRqk4hmWfebhg")
-	r = api.request('search/tweets', {'q':keyword, 'count': count})
 
-	total = 0
-	tossed = 0
-	for tweet in r:
-		# print(tweet)
-
-		geo = geocode(tweet["user"]["location"])
-		if geo != "BAD. DISCARD.":
-			total += 1
-			tweets.append([tweet["id_str"], 
-				tweet["text"], 
-				geo])
+	for i in range(0,4):
+		if i != 0:
+			max_id = tweets[-1][4]
+			r = api.request('search/tweets', {'q':keyword, 'count': count, 'lang': 'en', 'max_id': max_id})
 		else:
-			total += 1
-			tossed += 1
-			print("total: " + str(total) + " tossed: " + str(tossed))
+			r = api.request('search/tweets', {'q':keyword, 'count': count, 'lang': 'en'})
+
+		total = 0
+		tossed = 0
+		for tweet in r:
+			# print(tweet)
+
+			geo = geocode(tweet["user"]["location"])
+			if geo != "BAD. DISCARD.":
+				total += 1
+				tweets.append([tweet["id_str"], 
+					tweet["text"], 
+					geo,
+					tweet["created_at"],
+					tweet["id"]])
+			else:
+				total += 1
+				tossed += 1
+				print("total: " + str(total) + " tossed: " + str(tossed))
+
+		print(tweets[-1])
 
 	return tweets
 
 def runSearchAnalysis(keyword, count):
 	return analyze(search(keyword, count))
 
-# runSearchAnalysis(["trump"], 1000)
+runSearchAnalysis(["trump"], 1000)
 # print(geocode("somewhere"))
