@@ -1,0 +1,8 @@
+.page-container {
+	position: relative;
+	// force children
+	> * {
+		position: absolute;
+		width: 100vw;
+	}
+}

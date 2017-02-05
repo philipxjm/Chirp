@@ -15,21 +15,22 @@ gulp.task('compilehtml', function(cb) {
 	pump([
 		gulp.src('src/html/*.html'),
 		preprocess(),
-		gulp.dest('../chirp/static/'),
+		gulp.dest('../chirp/assets/'),
 		livereload()
 	], cb);
 });
 
 gulp.task('copylibs', function() {
 	return gulp.src('src/lib/**')
-		.pipe(gulp.dest('../chirp/static/js/lib/'));
+		.pipe(gulp.dest('../chirp/assets/js/lib/'));
 });
 
 gulp.task('compilejs', function(cb) {
 	pump([
 		gulp.src('src/js/*'),
 		//		uglify(),
-		gulp.dest('../chirp/static/js/')
+		gulp.dest('../chirp/assets/js/'),
+		livereload()
 	], cb);
 })
 
@@ -44,7 +45,8 @@ gulp.task('compilescss', function(cb) {
 		}),
 		cleancss(),
 		sourcemaps.write(),
-		gulp.dest('../chirp/static/css/')
+		gulp.dest('../chirp/assets/css/'),
+		livereload()
 	], cb);
 });
 
@@ -56,7 +58,7 @@ gulp.task('watch', function() {
 	gulp.watch('src/libs/*', ['copylibs']);
 })
 
-gulp.task('serve', serve('../chirp/static/'));
+gulp.task('serve', serve('../chirp/assets/'));
 
 gulp.task('build', [
 	'compilejs',
