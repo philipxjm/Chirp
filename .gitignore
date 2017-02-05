@@ -146,9 +146,6 @@ ENV/
 # Rope project settings
 .ropeproject
 
-<<<<<<< HEAD
 .idea/
-=======
-# node modules
 node_modules/
->>>>>>> 56c065e6b98091f836ba55260d294f00683af942
+
