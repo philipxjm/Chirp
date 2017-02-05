@@ -22,8 +22,10 @@ def analyzed_tweet_list(request, query):
             analyzed_tweet.search_string = query
             analyzed_tweet.twitID = tweet.twitID
             analyzed_tweet.label = tweet.label
-            analyzed_tweet.longitude = tweet.location[1]
-            analyzed_tweet.latitude = tweet.location[0]
+            if(tweet.location != None):
+                analyzed_tweet.longitude = tweet.location[1]
+                analyzed_tweet.latitude = tweet.location[0]
+                analyzed_tweet.state = tweet.location[2]
             analyzed_tweet.time = tweet.time
             analyzed_tweet.prob_pos = tweet.prob_pos
             analyzed_tweet.prob_neg = tweet.prob_neg
