@@ -36,9 +36,9 @@ def analyze(tweets):
 		result = json.loads(urlopen(request).read().decode())
 		analyzedTweet = AnalyzedTweet(tweet[0],
 			tweet[2],
-			result["label"], 
-			result["probability"]["pos"], 
-			result["probability"]["neg"], 
+			result["label"],
+			result["probability"]["pos"],
+			result["probability"]["neg"],
 			result["probability"]["neutral"])
 		print(analyzedTweet)
 		analyzedTweets.append(analyzedTweet)
