@@ -23,7 +23,7 @@ def geocode(locStr):
 	# print(url)
 	r = requests.get(url)
 	if r.json()["status"] == "OK":
-		return [r.json()["results"][0]["geometry"]["location"]["lat"], r.json()["results"][0]["geometry"]["location"]["lng"]]
+		return {"lat": r.json()["results"][0]["geometry"]["location"]["lat"], "lng": r.json()["results"][0]["geometry"]["location"]["lng"]}
 	else:
 		return "BAD. DISCARD."
 
