@@ -24,7 +24,12 @@ def geocode(locStr):
 	# print(url)
 	r = requests.get(url)
 	if r.json()["status"] == "OK":
-		return [r.json()["results"][0]["geometry"]["location"]["lat"], r.json()["results"][0]["geometry"]["location"]["lng"]]
+		# print(r.json())
+		address = r.json()["results"][0]["address_components"]
+		for x in range(0, len(address)):
+			state = address[x]["types"][0]
+			if state == "administrative_area_level_1":
+				return [r.json()["results"][0]["geometry"]["location"]["lat"], r.json()["results"][0]["geometry"]["location"]["lng"], r.json()["results"][0]["address_components"][x]["long_name"]]
 	else:
 		return "BAD. DISCARD."
 
@@ -83,4 +88,4 @@ def runSearchAnalysis(keyword, count):
 	return analyze(search(keyword, count))
 
 #runSearchAnalysis(["trump"], 1000)
-# print(geocode("somewhere"))
+# print(geocode("new york city"))
