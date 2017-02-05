@@ -23,7 +23,7 @@ def geocode(locStr):
 	# print(url)
 	r = requests.get(url)
 	if r.json()["status"] == "OK":
-		return {"lat": r.json()["results"][0]["geometry"]["location"]["lat"], "lng": r.json()["results"][0]["geometry"]["location"]["lng"]}
+		return [r.json()["results"][0]["geometry"]["location"]["lat"], r.json()["results"][0]["geometry"]["location"]["lng"]]
 	else:
 		return "BAD. DISCARD."
 
@@ -71,5 +71,5 @@ def search(keyword, count):
 def runSearchAnalysis(keyword, count):
 	return analyze(search(keyword, count))
 
-#runSearchAnalysis(["trump"], 1000)
+runSearchAnalysis(["trump"], 1000)
 # print(geocode("somewhere"))
