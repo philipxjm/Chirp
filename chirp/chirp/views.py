@@ -8,5 +8,6 @@ from . import analyzer
 @api_view(['GET'])
 def analyzed_tweet_list(request):
     print(request)
+    raise ValueError(request)
     serializer = serializers.AnalyzedTweetSerializer(analyzer.runSearchAnalysis(["trump"], count=1), many=True)
     return Response(serializer.data)
