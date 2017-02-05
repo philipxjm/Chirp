@@ -15,5 +15,5 @@ from . import models
 class AnalyzedTweetModelSerializer(serializers.ModelSerializer):
      class Meta:
         model = models.AnalyzedTweetModel
-        fields = ('twitID', 'label', 'latitude', 'longitude', 'time', 'prob_pos', 'prob_neg', 'prob_neu')
+        fields = ('search_string', 'twitID', 'label', 'latitude', 'longitude', 'time', 'prob_pos', 'prob_neg', 'prob_neu')
 
