@@ -18,7 +18,10 @@
 		el.appendChild(css);
 
 		//var request_url = 'data/' + req_name;
-		var request_url = 'http://13.82.219.142:8080/analyzed-tweets/' + req_name;
+		
+		var request_url;
+		request_url = 'http://13.82.219.142:8080/analyzed-tweets/' + req_name;
+		console.log('loading ' + request_url);
 		var width = 960,
 			height = 500,
 			centered;
