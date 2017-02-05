@@ -4,7 +4,7 @@ from . import views
 
 
 urlpatterns = [
-    url(r'^', views.analyzed_tweet_list_trump),
+    url(r'^', views.analyzed_tweet_list),
 ]
 
 

@@ -20,8 +20,5 @@ from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^analyzed-tweets/', include('tweetanalysis.urls'))
-
+    url(r'^analyzed-tweets/(?P<query>\w+)', include('tweetanalysis.urls'))
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
