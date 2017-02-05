@@ -7,4 +7,4 @@ pyparsing==2.1.10
 requests==2.13.0
 requests-oauthlib==0.7.0
 six==1.10.0
-TwitterSearch==1.0.1
+TwitterAPI==2.4.3
