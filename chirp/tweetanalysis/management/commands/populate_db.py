@@ -12,17 +12,22 @@ class Command(BaseCommand):
         tweets = analyzer.runSearchAnalysis(["trump"], count=1000)
 
         for tweet in tweets:
-            obj, created = AnalyzedTweetModel.objects.get_or_create(
-                twitID=tweet.twitID,
-                label=tweet.label,
-                longitude=tweet.location[1],
-                latitude=tweet.location[0],
-                time=tweet.time,
-                prob_pos=tweet.prob_pos,
-                prob_neg=tweet.prob_neg,
-                prob_neu=tweet.prob_neu
-            )
-
-            obj.save()
+            tweet_with_id = AnalyzedTweetModel.objects.filter(twitID=tweet.twitID)
+            print(tweet_with_id)
+            if(not tweet_with_id):
+                print("get a tweet")
+                analyzed_tweet = AnalyzedTweetModel()
+                analyzed_tweet.search_string = "trump"
+                analyzed_tweet.twitID = tweet.twitID
+                analyzed_tweet.label = tweet.label
+                if(tweet.location != None):
+                    analyzed_tweet.longitude = tweet.location[1]
+                    analyzed_tweet.latitude = tweet.location[0]
+                    analyzed_tweet.state = tweet.location[2]
+                analyzed_tweet.time = tweet.time
+                analyzed_tweet.prob_pos = tweet.prob_pos
+                analyzed_tweet.prob_neg = tweet.prob_neg
+                analyzed_tweet.prob_neu = tweet.prob_neu
+                analyzed_tweet.save()
 
         self.stdout.write(self.style.SUCCESS('Added 1000 tweets related to the keyword trump the database'))
