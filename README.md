@@ -3,8 +3,8 @@ Twitter Sentimental Analysis Using Natural Language Processing Visualized on a H
 Hack@Brown 2017
 
 ## Examples
-![alt tag](1.png)
-![alt tag](2.png)
+![alt tag](examples/1.png)
+![alt tag](examples/2.png)
 
 ## Inspiration
 With the recent controversial political climate of America and the world, people's opinions on critical issues has never mattered more. We wanted to create something that can use machine learning and natural language processing to analyze people's opinions and visualize it.
