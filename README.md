@@ -1,7 +1,10 @@
 # Chirp
-
 Twitter Sentimental Analysis Using Natural Language Processing Visualized on a Heatmap
 Hack@Brown 2017
+
+## Examples
+![alt tag](1.png)
+![alt tag](2.png)
 
 ## Inspiration
 With the recent controversial political climate of America and the world, people's opinions on critical issues has never mattered more. We wanted to create something that can use machine learning and natural language processing to analyze people's opinions and visualize it.
@@ -10,7 +13,6 @@ With the recent controversial political climate of America and the world, people
 We used Twitter's API to fetch tweets according to any given keyword. These tweets were processed using natural language processing and sentiment analysis techniques and persisted in a database, or fetched from the database if previously queried. Using the metadata associated with these analyzed tweets, we used D3 to visualize the number of tweets and their semantic value across a map of the United States. This map is dynamically generated, with zoom functionality and a panel in which we can view tweets associated with a particular state.
 
 ## How we built it
-
 We used Django as our web backend, running on a VM hosted by Microsoft Azure. Our REST API calls are routed through an Apache webserver and our database content is serialized and returned by the Django REST Framework. At the moment, our database is a SQLite3 database, but it is trivial to scale our database by switching to PostgreSQL sometime in the future. 
 
 The frontend is written in D3 and Vue.js, with Gulp as our dependency manager. This makes simple fetch API calls to the backend and we can retrieve and query specific keywords according to the URL of the request. The JSON data retrieved by these calls is inserted into the javascript-based view layer, and rendered to the user. In order to embed properly styled tweets, we make another HTTP request to Twitter using the IDs of the analyzed tweets. 
